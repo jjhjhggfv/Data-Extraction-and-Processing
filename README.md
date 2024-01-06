@@ -1,137 +1,108 @@
-# Data-Extraction-and-Processing
-A project based on Data cleaning, preprocessing , reduction , transformation , visualisation using R language
-The "Car Evaluation Data Set" project has several potential needs and a broad scope 
-depending on the specific goals and objectives. Here's an overview of the need for the project 
-and its potential scope:
-Need of the Project:
-1. Market Research and Decision-Making: 
-The project can serve as a tool for car manufacturers, dealers, and policymakers to 
-understand customer preferences and make informed decisions about car design, pricing, 
-and marketing strategies.
-2. Customer Insights: 
-It can provide valuable insights into what features or attributes customers prioritize when 
-evaluating cars. This knowledge can guide marketing and product development efforts.
-3. Predictive Analytics: 
-The dataset can be used for predictive analytics to foresee car acceptability and trends in 
-the automobile market, helping businesses plan their production and sales strategies.
-4. Consumer Guidance: 
-Consumers looking to purchase a car can use the project's outcomes to make more informed 
-choices based on their preferences and priorities.
-5. Machine Learning and Data Science Education: 
-This dataset is suitable for educational purposes, allowing students and aspiring data 
-scientists to practice and improve their skills in data analysis, machine learning, and data 
-visualization.
-Scope of the Project:
-1. Classification Model: 
-Develop a car classification model that can predict car acceptability based on the 
-given attributes. The scope includes data preprocessing, feature engineering, model 
-selection, and evaluation.
-2. Feature Importance Analysis: 
-Investigate which attributes have the most significant impact on car acceptability and 
-explore feature selection techniques.
-3. Exploratory Data Analysis (EDA): 
-Conduct in-depth EDA to uncover patterns, relationships, and insights within the 
-dataset. This may include data visualization and statistical analysis.
-4. Market Analysis: 
-Use the dataset to gain insights into market trends, consumer preferences, and 
-competitive analysis, which can guide market strategies.
-5. Customer Segmentation: 
-Apply clustering techniques to segment customers based on their car preferences, 
-allowing for more targeted marketing and product development strategies.
-6. Predictive Maintenance: 
-Develop predictive maintenance models to anticipate when a car may require 
-servicing, benefiting both car owners and service providers.
-7. Used Car Price Prediction: 
-Create a regression model to predict the price of used cars based on their attributes, 
-which is valuable for buyers and sellers in the used car market.
-8. Business Decision Support: 
-Use the project to provide data-driven insights and recommendations to businesses in 
-the automotive industry, helping them make informed decisions.
-9. Anomaly Detection: 
-Implement anomaly detection methods to identify unusual car instances that may 
-require special attention or investigation.
-10. Hybrid Models: 
-Experiment with ensemble techniques and hybrid models, combining different 
-machine learning algorithms for improved prediction accuracy.
-The scope of the project can be tailored to specific objectives and can range from relatively 
-simple analysis to more complex and in-depth investigations into various aspects of car 
-evaluation and the automobile market.
-Existing approaches for evaluating cars or similar products typically fall into two categories: 
-subjective evaluations and objective evaluations. Each approach has its own set of 
-limitations.
-Subjective Approaches:
-1. Consumer Surveys and Reviews:
- - Approach: 
-Collect feedback from car owners through surveys and online reviews.
- - Limitations:
- - Subjective opinions can vary greatly from person to person.
- - Biased or fake reviews can skew results.
- - Limited to the experiences of those who participated in the survey or wrote reviews.
-2. Expert Opinions:
- - Approach: 
-Gather evaluations from automotive experts, journalists, or reviewers.
- - Limitations:
- - Experts may have biases or preferences.
- - Their opinions may not represent the general population's views.
- - Limited to the expertise of the selected individuals.
-3. Focus Groups:
- - Approach: 
-Assemble groups of consumers to discuss and evaluate cars.
- - Limitations:
- - Small sample size, which may not be representative.
- - Group dynamics can influence opinions.
- - Qualitative data that is challenging to quantify.
-Objective Approaches:
-1. Performance Metrics:
- - Approach: 
-Measure objective performance metrics such as speed, fuel efficiency, and safety 
-features.
- - Limitations:
-- Focusing solely on performance may neglect other important factors like comfort 
-and design.
- - Doesn't capture the overall experience of owning a car.
-2. Car Safety Ratings:
- - Approach: 
-Evaluate cars based on safety standards and crash tests.
- - Limitations:
- - Safety is just one aspect of car evaluation.
- - May not reflect customer preferences for other features.
-3. Cost of Ownership:
- - Approach: 
-Assess the total cost of owning a car, including purchase price, insurance, 
-maintenance, and fuel.
- - Limitations:
- - Ignores qualitative factors like aesthetics and driving experience.
- - Cost considerations may vary among individuals.
-4. Environmental Impact:
- - Approach: 
-Evaluate cars based on their environmental impact, including emissions and fuel 
-efficiency.
- - Limitations:
- - Focuses on a specific aspect (environmental impact) to the exclusion of other factors.
-Limitations of Existing Approaches:
-1. Single-Dimensional Analysis: 
-Many approaches focus on a single aspect (e.g., performance, safety, cost), which 
-may not capture the holistic car evaluation that considers various attributes important 
-to consumers.
-2. Subjectivity and Bias: 
-Subjective approaches can be influenced by personal biases and emotions, while 
-objective approaches may not consider the emotional and experiential aspects of 
-owning a car.
-3. Limited Data: 
-Surveys, reviews, and expert opinions are based on the data available from a limited 
-number of respondents or experts, which may not be representative of the entire 
-population.
-4. Difficulty in Aggregation: 
-Combining various subjective and objective evaluations into a comprehensive rating 
-or score can be challenging due to the diversity of opinions and metrics.
-5. Changing Preferences: 
-Consumer preferences evolve over time, and approaches relying on historical data 
-may not reflect current trends or priorities.
-6. Lack of Customization: 
-Approaches often don't consider individual preferences and needs, providing 
-generalized evaluations that may not align with specific buyers' requirements.
-In light of these limitations, data-driven approaches, such as machine learning models trained 
-on large and diverse datasets like the "Car Evaluation Data Set," can provide a more 
-comprehensive and objective assessment of car acceptability by considering multiple 
-attributes and consumer preferences
+# Load the dataset
+data=read.csv("car_evaluation.csv")
+print(data)
+
+str(data)
+summary(data)
+
+# Replace missing values with appropriate methods, e.g., mean, median
+data[data == "?"] <- NA
+data <- na.omit(data)
+print(data)
+
+#Renaming Columns
+  Give meaningful names to the columns.
+```R
+colnames(data) <- c("buying", "maint", "doors", "persons", "lug_boot", "safety", "class")
+print(data)
+
+#Dealing with Categorical Data
+data$buying <- as.factor(data$buying)
+data$maint <- as.factor(data$maint)
+data$doors <- as.factor(data$doors)
+data$persons <- as.factor(data$persons)
+data$lug_boot <- as.factor(data$lug_boot)
+data$safety <- as.factor(data$safety)
+data$class <- as.factor(data$class)
+print(data)
+
+#Data Visualisation
+
+#Bar Plot 
+library(ggplot2)
+ggplot(data, aes(x = class)) +
+  geom_bar() +
+  labs(title = "Car Class Distribution")
+
+#Boxplot
+ggplot(data, aes(x = class, y = buying)) +
+  geom_boxplot() +
+  labs(title = "Buying Attribute Box Plot by Class")
+
+
+#Scatterplot
+ggplot(data, aes(x = buying, y = safety)) +
+  geom_point() +
+  labs(title = "Scatter Plot: Buying vs. Safety")
+
+
+#Pie Chart
+library(plotly)
+
+plot_ly(data, labels = ~doors, type = 'pie', ids = ~doors) %>%
+  layout(title = "Doors Attribute Pie Chart")
+
+#Data Transformation
+
+#Normalization/Standardization
+# Using the 'scale' function
+data[,1:6]=lapply(data[,1:6],as.numeric)
+data[, 1:6] <- scale(data[, 1:6])
+print(data)
+
+
+#Feature Engineering
+# Example: Combine 'doors' and 'persons' to create a new feature
+data$doors_persons <- paste(data$doors, data$persons, sep = "_")
+print(data)
+
+
+#Binning or Discretization
+
+# Assuming 'buying' is a categorical column in your dataset
+frequency_table <- table(data$buying)
+print(frequency_table)
+print(data)
+
+#Aggregation
+# Calculate the mean 'maint' cost for each 'buying' category
+aggregate(data$maint, by = list(buying = data$buying), FUN = mean)
+print(data)
+
+#Dropping Unnecessary Columns
+# Example: Remove the 'buying' and 'maint' columns
+data=data[, c("buying", "maint")]
+print(data)
+
+
+#Data Reduction
+#PCA
+# Check and convert columns to numeric
+data[, 1:6] <- sapply(data[, 1:6], as.numeric)
+
+# Check for missing values and impute if necessary
+data[is.na(data)] <- 0  # You can choose a different imputation method if needed
+
+# Perform PCA on the numeric features
+pca_result <- prcomp(data[, 1:6], scale. = TRUE)
+
+# Summary of PCA results
+summary(pca_result)
+
+# Extract the principal components
+pcs <- pca_result$x
+print(data)
+
+# You can choose to keep a certain number of principal components based on the explained variance
+# For example, keeping the first two components
+selected_pcs <- pcs[, 1:2]
